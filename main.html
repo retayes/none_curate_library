@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoNe_curate</title>
+    <style>
+        /* Основные стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Параллакс-эффект */
+        .parallax {
+            background: url("covers/none.jpg") fixed;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .parallax::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #00f3ff, #ff00ff);
+            mix-blend-mode: multiply;
+            opacity: 0.5;
+        }
+
+        /* Стили для списка треков */
+        .track-list {
+            background: #0a0a0a;
+            padding: 50px 20px;
+            min-height: 100vh;
+        }
+
+        .track-item {
+            background: rgba(255, 255, 255, 0.05);
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 800px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .track-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+        }
+
+        /* Обложка трека */
+        .track-cover {
+            width: 120px;
+            height: 120px;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+            transition: 0.3s;
+        }
+
+        .track-cover:hover {
+            transform: scale(1.05);
+        }
+
+        /* Правая часть с информацией */
+        .track-info {
+            flex: 1;
+        }
+
+        /* Аудио-плеер */
+        audio {
+            width: 100%;
+            margin: 10px 0;
+            filter: invert(1);
+        }
+
+        /* Кнопка скачивания */
+        .btn {
+            background: linear-gradient(45deg, #00f3ff, #ff00ff);
+            border: none;
+            padding: 8px 20px;
+            color: white;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #00f3ff;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .track-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            .track-cover {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+
+
+        html {
+        scroll-behavior: smooth; /* Плавный скролл для якорных ссылок */
+        -webkit-overflow-scrolling: touch; /* Аппаратное ускорение на iOS */
+    }
+
+    /* Оптимизация рендеринга */
+    body {
+        overscroll-behavior-y: contain; /* Убирает "подпрыгивание" при скролле */
+    }
+
+    /* Отключение параллакса на мобилках */
+    @media (max-width: 768px) {
+        .parallax {
+            background-attachment: scroll !important;
+            background-position: center !important;
+        }
+
+        /* Упрощение анимаций */
+        .track-item {
+            transition: none !important;
+            transform: none !important;
+        }
+    }
+
+    </style>
+</head>
+<body>
+    <!-- Параллакс-шапка -->
+    <section class="parallax">
+        <h1 style="color: #fff; text-shadow: 0 0 20px #00f3ff">NoNe_curate</h1>
+    </section>
+
+    <!-- Список треков -->
+    <div class="track-list">
+        <!-- Трек 1 -->
+        <div class="track-item">
+            <img src="covers/cover1.jpg" class="track-cover" alt="Обложка трека">
+            <div class="track-info">
+                <h2 style="color: #00f3ff; margin-bottom: 10px">Каменный олень</h2>
+                <audio controls>
+                    <source src="tracks/olen.mp3" type="audio/mpeg">
+                </audio>
+                <button class="btn" onclick="window.location.href='tracks/olen.mp3'">Скачать</button>
+            </div>
+        </div>
+
+        <!-- Трек 2 -->
+        <div class="track-item">
+            <img src="covers/cover2.jpg" class="track-cover" alt="Обложка трека">
+            <div class="track-info">
+                <h2 style="color: #ff00ff; margin-bottom: 10px">Фотонный чиж</h2>
+                <audio controls>
+                    <source src="tracks/чиж.mp3" type="audio/mpeg">
+                </audio>
+                <button class="btn" onclick="window.location.href='tracks/чиж.mp3'">Скачать</button>
+            </div>
+        </div>
+
+        <div class="track-item">
+            <img src="covers/cover3.jpg" class="track-cover" alt="Обложка трека">
+            <div class="track-info">
+                <h2 style="color: #ff00ff; margin-bottom: 10px">Газовый орёл</h2>
+                <audio controls>
+                    <source src="tracks/газовый_орел.mp3" type="audio/mpeg">
+                </audio>
+                <button class="btn" onclick="window.location.href='tracks/газовый_орел.mp3'">Скачать</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Параллакс-эффект для заголовка
+        window.addEventListener('scroll', () => {
+            const parallax = document.querySelector('.parallax');
+            parallax.style.backgroundPositionY = window.pageYOffset * 0.2 + 'px';
+        });
+        // Убрать тяжёлый параллакс-скрипт
+    window.addEventListener('scroll', () => {
+        // Удалите код, двигающий фон (параллакс)
+    }, { passive: true }); // passive: true для оптимизации
+    </script>
+</body>
+</html>
