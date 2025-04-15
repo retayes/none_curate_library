@@ -139,36 +139,7 @@
             transform: none !important;
         }
     }
-/* Стили для прогресс-бара */
-.progress-container {
-    width: 90%; /* Широкая ширина по умолчанию */
-    height: 4px;
-    background: #333;
-    margin: 15px auto;
-    border-radius: 2px;
-    cursor: pointer;
-}
 
-.progress-bar {
-    width: 0%;
-    height: 100%;
-    background: #00f3ff;
-    border-radius: 2px;
-    transition: width 0.1s linear;
-}
-
-/* Для мобильных устройств */
-@media (max-width: 768px) {
-    .progress-container {
-        width: 95%; /* Ещё шире на маленьких экранах */
-        height: 6px; /* Выше для удобства касания */
-        margin: 20px auto;
-    }
-
-    .progress-bar {
-        box-shadow: 0 0 8px #00f3ff; /* Свечение для лучшей видимости */
-    }
-}
     </style>
 </head>
 <body>
@@ -216,20 +187,6 @@
     </div>
 
     <script>
-        // JavaScript для управления прогресс-баром
-const audio = document.getElementById('audio');
-const progressBar = document.querySelector('.progress-bar');
-
-audio.addEventListener('timeupdate', () => {
-    const progress = (audio.currentTime / audio.duration) * 100;
-    progressBar.style.width = `${progress}%`;
-});
-
-document.querySelector('.progress-container').addEventListener('click', (e) => {
-    const rect = e.target.getBoundingClientRect();
-    const pos = (e.clientX - rect.left) / rect.width;
-    audio.currentTime = pos * audio.duration;
-});
         // Параллакс-эффект для заголовка
         window.addEventListener('scroll', () => {
             const parallax = document.querySelector('.parallax');
