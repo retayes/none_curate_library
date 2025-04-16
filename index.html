@@ -5,6 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NoNe_curate</title>
     <style>
+
+#particles {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: floatUp linear infinite;
+    filter: blur(1px);
+    will-change: transform;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-120vh) translateX(20px);
+        opacity: 0;
+    }
+}
+
+
         /* Основные стили */
         * {
             margin: 0;
@@ -125,13 +158,17 @@
     body {
         overscroll-behavior-y: contain; /* Убирает "подпрыгивание" при скролле */
     }
-
-    /* Отключение параллакса на мобилках */
     @media (max-width: 768px) {
-        .parallax {
-            background-attachment: scroll !important;
-            background-position: center !important;
-        }
+    audio {
+        width: 100%; /* Занимает всю ширину контейнера */
+        max-width: 100%; /* На всякий случай */
+    }
+
+    /* Можно чуть уменьшить отступы */
+    .track-info {
+        padding: 0 5px;
+    }
+}
 
         /* Упрощение анимаций */
         .track-item {
@@ -143,6 +180,8 @@
     </style>
 </head>
 <body>
+<div id="particles"></div>
+
     <!-- Параллакс-шапка -->
     <section class="parallax">
         <h1 style="color: #fff; text-shadow: 0 0 20px #00f3ff">NoNe_curate</h1>
@@ -187,6 +226,36 @@
     </div>
 
     <script>
+   const particleContainer = document.getElementById('particles');
+    const colors = ['#15a0b7', '#ff0fd2'];
+
+    function createParticle() {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+
+        const size = Math.random() * 5 + 3; // 3px — 8px
+        const color = colors[Math.floor(Math.random() * colors.length)];
+
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.bottom = '0px';
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.background = color;
+        particle.style.animationDuration = (20 + Math.random() * 5) + 's';
+        particle.style.boxShadow = `0 0 10px ${color}, 0 0 20px ${color}`;
+        particle.style.opacity = 0.6 + Math.random() * 0.4;
+
+        particleContainer.appendChild(particle);
+
+        setTimeout(() => {
+            particle.remove();
+        }, 20000);
+    }
+
+    setInterval(createParticle, 1200); // Можно сделать 60 для больше частиц
+
+
+
         // Параллакс-эффект для заголовка
         window.addEventListener('scroll', () => {
             const parallax = document.querySelector('.parallax');
