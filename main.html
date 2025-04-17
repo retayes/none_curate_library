@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoNe_curate</title>
+    <style>
+
+#particles {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: floatUp linear infinite;
+    filter: blur(1px);
+    will-change: transform;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-120vh) translateX(20px);
+        opacity: 0;
+    }
+}
+
+
+        /* Основные стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Параллакс-эффект */
+        .parallax {
+            background: url("covers/none.jpg") fixed;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .parallax::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #00f3ff, #ff00ff);
+            mix-blend-mode: multiply;
+            opacity: 0.5;
+        }
+
+        /* Стили для списка треков */
+        .track-list {
+            background: #0a0a0a;
+            padding: 50px 20px;
+            min-height: 100vh;
+        }
+
+        .track-item {
+            background: rgba(255, 255, 255, 0.05);
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 800px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .track-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+        }
+
+        /* Обложка трека */
+        .track-cover {
+            width: 120px;
+            height: 120px;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+            transition: 0.3s;
+        }
+
+        .track-cover:hover {
+            transform: scale(1.05);
+        }
+
+        /* Правая часть с информацией */
+        .track-info {
+            flex: 1;
+        }
+
+        /* Аудио-плеер */
+        audio {
+            width: 100%;
+            margin: 10px 0;
+            filter: invert(1);
+        }
+
+        /* Кнопка скачивания */
+        .btn {
+            background: linear-gradient(45deg, #00f3ff, #ff00ff);
+            border: none;
+            padding: 8px 20px;
+            color: white;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #00f3ff;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .track-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            .track-cover {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+
+
+        html {
+        scroll-behavior: smooth; /* Плавный скролл для якорных ссылок */
+        -webkit-overflow-scrolling: touch; /* Аппаратное ускорение на iOS */
+    }
+
+    /* Оптимизация рендеринга */
+    body {
+        overscroll-behavior-y: contain; /* Убирает "подпрыгивание" при скролле */
+    }
+    @media (max-width: 768px) {
+    audio {
+        width: 100%; /* Занимает всю ширину контейнера */
+        max-width: 100%; /* На всякий случай */
+    }
+
+    /* Можно чуть уменьшить отступы */
+    .track-info {
+        padding: 0 5px;
+    }
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #ff00ff, #00f3ff);
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+    text-shadow: 0 0 10px #ff00ff66;
+}
+
+
+    </style>
+</head>
+<body>
+<div id="particles"></div>
+
+    <!-- Параллакс-шапка -->
+    <section class="parallax">
+        <h1 style="color: #fff; text-shadow: 0 0 20px #00f3ff">NoNe_curate</h1>
+    </section>
+
+    <!-- Список треков -->
+    <div class="track-list">
+        <!-- Трек 1 -->
+        <div class="track-item">
+            <img src="https://avatars.yandex.net/get-music-content/14715139/94354bf3.a.36279864-1/200x200" class="track-cover" alt="Обложка трека">
+            <div class="track-info">
+                <h2 class="gradient-text" style="margin-bottom: 10px;">Каменный олень</h2>
+                <audio controls>
+                    <source src="tracks/olen.mp3" type="audio/mpeg">
+                </audio>
+                <button class="btn" onclick="window.location.href='tracks/olen.mp3'">Скачать</button>
+            </div>
+        </div>
+
+        <!-- Трек 2 -->
+        <div class="track-item">
+            <img src="covers/cover2.jpg" class="track-cover" alt="Обложка трека">
+            <div class="track-info">
+                <h2 class="gradient-text" style="margin-bottom: 10px;">Фотонный чиж</h2>
+                <audio controls>
+                    <source src="tracks/чиж.mp3" type="audio/mpeg">
+                </audio>
+                <button class="btn" onclick="window.location.href='tracks/чиж.mp3'">Скачать</button>
+            </div>
+        </div>
+
+        <div class="track-item">
+            <img src="https://avatars.yandex.net/get-music-content/14270105/a18dd5b4.a.36099927-1/200x200" class="track-cover" alt="Обложка трека">
+            <div class="track-info">
+                <h2 class="gradient-text" style="margin-bottom: 10px;">Газовый орёл</h2>
+                <audio controls>
+                    <source src="tracks/газовый_орел.mp3" type="audio/mpeg">
+                </audio>
+                <button class="btn" onclick="window.location.href='tracks/газовый_орел.mp3'">Скачать</button>
+            </div>
+        </div>
+        <div class="track-item">
+            <img src="https://avatars.yandex.net/get-music-content/15317937/dc16480b.a.36168635-1/200x200" class="track-cover" alt="Обложка трека">
+            <div class="track-info">
+                <h2 class="gradient-text" style="margin-bottom: 10px;">Ядерный кабан</h2>
+                <audio controls>
+                    <source src="tracks/ядерныйкабан.mp3" type="audio/mpeg">
+                </audio>
+                <button class="btn" onclick="window.location.href='tracks/ядерныйкабан.mp3'">Скачать</button>
+            </div>
+        </div>
+        <div class="track-item">
+            <img src="covers/cover5.jpg" class="track-cover" alt="Обложка трека">
+            <div class="track-info">
+                <h2 class="gradient-text" style="margin-bottom: 10px;">Тёмный крокодил</h2>
+                <audio controls>
+                    <source src="tracks/крокодил.mp3" type="audio/mpeg">
+                </audio>
+                <button class="btn" onclick="window.location.href='tracks/крокодил.mp3'">Скачать</button>
+            </div>
+        </div>
+        <div class="track-item">
+            <img src="https://avatars.yandex.net/get-music-content/14183125/96b61418.a.36260312-1/200x200" class="track-cover" alt="Обложка трека">
+            <div class="track-info">
+                <h2 class="gradient-text" style="margin-bottom: 10px;">Электроблоха</h2>
+                <audio controls>
+                    <source src="tracks/электроблоха.mp3" type="audio/mpeg">
+                </audio>
+                <button class="btn" onclick="window.location.href='tracks/электроблоха.mp3'">Скачать</button>
+            </div>
+        </div>
+        <div class="track-item">
+            <img src="https://avatars.yandex.net/get-music-content/14651289/479f9f70.a.36196707-1/200x200" class="track-cover" alt="Обложка трека">
+            <div class="track-info">
+                <h2 class="gradient-text" style="margin-bottom: 10px;">Желатиновый медведь</h2>
+                <audio controls>
+                    <source src="tracks/медведь.mp3" type="audio/mpeg">
+                </audio>
+                <button class="btn" onclick="window.location.href='tracks/медведь.mp3'">Скачать</button>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <script>
+   const particleContainer = document.getElementById('particles');
+    const colors = ['#15a0b7', '#ff0fd2'];
+
+    function createParticle() {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+
+        const size = Math.random() * 5 + 3; // 3px — 8px
+        const color = colors[Math.floor(Math.random() * colors.length)];
+
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.bottom = '0px';
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.background = color;
+        particle.style.animationDuration = (20 + Math.random() * 5) + 's';
+        particle.style.boxShadow = `0 0 10px ${color}, 0 0 20px ${color}`;
+        particle.style.opacity = 0.6 + Math.random() * 0.4;
+
+        particleContainer.appendChild(particle);
+
+        setTimeout(() => {
+            particle.remove();
+        }, 20000);
+    }
+
+    setInterval(createParticle, 1200); // Можно сделать 60 для больше частиц
+
+
+
+        // Параллакс-эффект для заголовка
+        window.addEventListener('scroll', () => {
+            const parallax = document.querySelector('.parallax');
+            parallax.style.backgroundPositionY = window.pageYOffset * 0.2 + 'px';
+        });
+        // Убрать тяжёлый параллакс-скрипт
+    window.addEventListener('scroll', () => {
+        // Удалите код, двигающий фон (параллакс)
+    }, { passive: true }); // passive: true для оптимизации
+    </script>
+</body>
+</html>
